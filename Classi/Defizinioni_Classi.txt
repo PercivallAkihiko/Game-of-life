@@ -1,0 +1,87 @@
+----------------------PREDA----------------------  
+ATTRIBUTI                                   
+	-HASMOVED:
+		0 / 1 Indica se la PREDA si e gia mosso in questo TURNO
+
+	-TEMPO_DI_RIPRODUZIONE:
+		Indica quanti quanti TURNI sono passati senza essersi riprodotto
+		Se raggiunge TOT allora potra riprodursi
+
+METODI
+	-MOVE:		
+		INPUT - Griglia degli 8 VICINI
+		OUTPUT - Nuova posizione aggiornata 	
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		CONDIZIONI
+			-Deve esserci una casella intorno una casella LIBERA
+			-HASMOVED deve essere 0, nel caso contrario HASMOVED verra portato nuovamente a 0 senza fare nessun movimento
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		La PREDA si muove casualmente in una delle caselle adiacenti, ammesso che almeno 1 casella sia libera
+		Se LA NUOVA POSIZIONE E'  6,7,8,9 allora HASMOVED = 1
+
+	-BREED:
+		INPUT - Griglia degli 8 VICINI
+		OUTPUT - 1 se deve riprodusi, 0 altrimenti
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		CONDIZIONI
+			-Deve almeno una casella ADIACENTE LIBERA
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		Se TEMPO_DI_RIPRODUZIONE raggiunge TOT allora deve riprodursi e riportare TEMPO_DI_RIPRODUZIONE a 0 altrimenti restituisce 0
+	
+----------------------PREDATORE----------------------
+ATTRIBUTI
+	-HASMOVED:
+		0 / 1 Indica se la PREDATORE si e gia mosso in questo TURNO
+	-ENERGY:
+		Indica l'energia del PREDATORE
+		PER OGNI TURNO viene decrementato di 1
+		Se mangia una PREDA viene incrementato di TOT
+		Raggiunto ENERGY = 0 il PREDATORE MUORE nel turno
+		
+METODI
+	-MOVE:
+		Input - Griglia degli 8 VICINI
+		Output - Nuova posizione aggiornata
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		CONDIZIONI
+			-Deve esserci una casella intorno una casella LIBERA o una PREDA adiacente
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		Il PREDATORE si muove casualmente in una delle caselle adiacenti in cui e presente una PREDA, in assenza di PREDE
+		allora si muovera casualmente in una delle caselle adiacenti libere
+
+	-BREED:
+		OUTPUT - 1 se deve riprodusi, 0 altrimenti
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		CONDIZIONI
+			-Deve esserci una casella intorno LIBERA
+		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		Se ENERGY raggiunge TOT allora deve riprodursi e riportare ENERGY a 0
+		altrimenti ritorna 0
+
+	-DEAD:
+		OUTPUT - 1 se deve muorire, 0 altrimenti
+		Se ENERGY = 0 il PREDATORE deve MUORIRE, altrimenti restituisce 0	
+
+----------------------GRIGLIA----------------------
+ATTRIBUTI
+	-MATRIX:
+		Matrice contentente oggetti
+
+METODI
+	-UPDATE_ROUND:
+		Viene controllata la matrice CASELLA PER CASELLA ciclando 2 FOR
+		Se viene trovato un OGGETTO allora:
+		if PREDA:
+			・ if BREED(Griglia degli 8 VICINI) - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
+			・ MOVE(Griglia degli 8 VICINI) - Aggiorno la nuova posizione della PREDA
+		if PREDATORE:
+			・ if DEAD() - Lo cancello dalla griglia IMPORTANTE: SE MUORE SALTO GLI ALTRI 2 METODI
+			・ if BREED() - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
+			・ MOVE() - Aggiorno la nuova posizione della PREDA
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+CASELLE VICINE
+123
+406
+789
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
