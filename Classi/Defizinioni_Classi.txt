@@ -1,11 +1,15 @@
 ----------------------PREDA----------------------  
-ATTRIBUTI                                   
+COSTRUTTO
+	PREDA(BREED_TIME)
+ATTRIBUTI        
+	-CONST BREED_TIME:
+		Indica ogni quanti turni la PREDA deve riprodursi                          
 	-HASMOVED:
 		0 / 1 Indica se la PREDA si e gia mosso in questo TURNO
 
 	-TEMPO_DI_RIPRODUZIONE:
 		Indica quanti quanti TURNI sono passati senza essersi riprodotto
-		Se raggiunge TOT allora potra riprodursi
+		Se raggiunge BREED_TIME allora potra riprodursi
 
 METODI
 	-MOVE:		
@@ -29,13 +33,16 @@ METODI
 		Se TEMPO_DI_RIPRODUZIONE raggiunge TOT allora deve riprodursi e riportare TEMPO_DI_RIPRODUZIONE a 0 altrimenti restituisce 0
 	
 ----------------------PREDATORE----------------------
+COSTRUTTO
+	PREDATORE (ENERGY, BREED_ENERGY)
 ATTRIBUTI
+	-CONST BREED_ENERGY:
 	-HASMOVED:
 		0 / 1 Indica se la PREDATORE si e gia mosso in questo TURNO
 	-ENERGY:
 		Indica l'energia del PREDATORE
 		PER OGNI TURNO viene decrementato di 1
-		Se mangia una PREDA viene incrementato di TOT
+		Se mangia una PREDA viene incrementato di CONST_BREED
 		Raggiunto ENERGY = 0 il PREDATORE MUORE nel turno
 		
 METODI
@@ -63,6 +70,8 @@ METODI
 		Se ENERGY = 0 il PREDATORE deve MUORIRE, altrimenti restituisce 0	
 
 ----------------------GRIGLIA----------------------
+COSTRUTTO
+	-GRIGLIA( MATRICE )
 ATTRIBUTI
 	-MATRIX:
 		Matrice contentente oggetti
