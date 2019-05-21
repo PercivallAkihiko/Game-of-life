@@ -13,23 +13,20 @@ ATTRIBUTI
 
 METODI
 	-MOVE:		
-		INPUT - Griglia degli 8 VICINI
+		INPUT - Lista tuple coordinate LIBERE
 		OUTPUT - Nuova posizione aggiornata 	
 		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		CONDIZIONI
-			-Deve esserci una casella intorno una casella LIBERA
 			-HASMOVED deve essere 0, nel caso contrario HASMOVED verra portato nuovamente a 0 senza fare nessun movimento
 		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		La PREDA si muove casualmente in una delle caselle adiacenti, ammesso che almeno 1 casella sia libera
+		La PREDA si muove casualmente in una delle caselle adiacenti, ammesso che almeno 1 casella sia libera.
+		La nuova posizione verra semplicemente scelte RANDOMIZZANDO un elemento della lista coordinate
 		Se LA NUOVA POSIZIONE E'  6,7,8,9 allora HASMOVED = 1
 
 	-BREED:
-		INPUT - Griglia degli 8 VICINI
+		INPUT - Lista tuple coordinate LIBERE
 		OUTPUT - 1 se deve riprodusi, 0 altrimenti
-		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		CONDIZIONI
-			-Deve almeno una casella ADIACENTE LIBERA
-		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		La nuova posizione verra semplicemente scelte RANDOMIZZANDO un elemento della lista coordinate
 		Se TEMPO_DI_RIPRODUZIONE raggiunge TOT allora deve riprodursi e riportare TEMPO_DI_RIPRODUZIONE a 0 altrimenti restituisce 0
 	
 ----------------------PREDATORE----------------------
@@ -47,16 +44,19 @@ ATTRIBUTI
 		
 METODI
 	-MOVE:
-		Input - Griglia degli 8 VICINI
-		Output - Nuova posizione aggiornata
+		INPUT - Lista tuple coordinate LIBERE, Lista tuple coordinate delle PREDE VICINE
+		OUTPUT - Nuova posizione aggiornata
 		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		CONDIZIONI
 			-Deve esserci una casella intorno una casella LIBERA o una PREDA adiacente
 		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Il PREDATORE si muove casualmente in una delle caselle adiacenti in cui e presente una PREDA, in assenza di PREDE
 		allora si muovera casualmente in una delle caselle adiacenti libere
+		Viene RANDOMIZZATO un elemento della LISTA TUPLE COORDINATE DELLE PREDE VICINE, se la lista e VUOTA allora viene RANDOMIZZATO un elemento
+		della seconda lista e ritornato
 
 	-BREED:
+		INPUT - Lista tuple coordinate LIBERE
 		OUTPUT - 1 se deve riprodusi, 0 altrimenti
 		!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		CONDIZIONI
@@ -78,15 +78,16 @@ ATTRIBUTI
 
 METODI
 	-UPDATE_ROUND:
-		Viene controllata la matrice CASELLA PER CASELLA ciclando 2 FOR
+		Vengono calcolate 2 liste (Lista tuple coordinate LIBERE e Lista tuple coordinate delle PREDE)
+		Viene controllata la matrice CELLA PER CELLA ciclando 2 FOR
 		Se viene trovato un OGGETTO allora:
 		if PREDA:
-			・ if BREED(Griglia degli 8 VICINI) - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
-			・ MOVE(Griglia degli 8 VICINI) - Aggiorno la nuova posizione della PREDA
+			・ if BREED(Lista tuple coordinate LIBERE) - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
+			・ MOVE(Lista tuple coordinate LIBERE) - Sposto l'oggetto presente nella matrice nella nuova cella
 		if PREDATORE:
 			・ if DEAD() - Lo cancello dalla griglia IMPORTANTE: SE MUORE SALTO GLI ALTRI 2 METODI
-			・ if BREED() - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
-			・ MOVE() - Aggiorno la nuova posizione della PREDA
+			・ if BREED(Lista tuple coordinate LIBERE) - Istanzio un nuovo oggetto e lo posizione casualmente in una casella ADIACENTE LIBERA
+			・ MOVE(Lista tuple coordinate LIBERE, Lista tuple coordinate delle PREDE VICINE) - Aggiorno la nuova posizione della PREDA
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 CASELLE VICINE
