@@ -45,7 +45,7 @@ public class Predatore {
 	}
 	
 	public int breed(LinkedList free_spaces) {
-		//ritorna 1 se il predatore puo` riprodursi (se ci sono spazi liberi adiacenti intorno a lui, 0 altrimenti.
+		//ritorna 1 se la preda puo` riprodurs, 0 altrimenti.
 		if (free_spaces.size() == 0) return 0;
 		
 		return 1;
