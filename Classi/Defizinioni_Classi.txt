@@ -71,7 +71,8 @@ METODI
 
 ----------------------GRIGLIA----------------------
 COSTRUTTO
-	-GRIGLIA( MATRICE )
+	-GRIGLIA( grid_width, grid_height)
+
 ATTRIBUTI
 	-MATRIX:
 		Matrice contentente oggetti
@@ -81,7 +82,6 @@ METODI
 	-CHECK_AROUND:
 		INPUT: Coordinate della cella interessata
 		OUTPUT: Lista tuple coordinate LIBERE, Lista tuple coordinate delle PREDE VICINE
-		
 	
 	-UPDATE_ROUND:
 		Vengono calcolate 2 liste (Lista tuple coordinate LIBERE e Lista tuple coordinate delle PREDE)
