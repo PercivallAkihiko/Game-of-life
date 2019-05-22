@@ -77,6 +77,12 @@ ATTRIBUTI
 		Matrice contentente oggetti
 
 METODI
+
+	-CHECK_AROUND:
+		INPUT: Coordinate della cella interessata
+		OUTPUT: Lista tuple coordinate LIBERE, Lista tuple coordinate delle PREDE VICINE
+		
+	
 	-UPDATE_ROUND:
 		Vengono calcolate 2 liste (Lista tuple coordinate LIBERE e Lista tuple coordinate delle PREDE)
 		Viene controllata la matrice CELLA PER CELLA ciclando 2 FOR
