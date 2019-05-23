@@ -32,10 +32,10 @@ public class Griglia {
 
                     if(class_name == "Preda"){
                         //Check if it's a FISH
-                        coordinates fish_coordinates = new coordinates(check_col, check_row);
+                        coordinates fish_coordinates = new coordinates(check_col, check_row); //Add FISH coordinates
                         fish.add(fish_coordinates);
                     }
-                    else if(class_name != "Predatore" && class_name != "wall"){
+                    else if(class_name != "Predatore" && class_name != "wall"){              //Add SHARK coordinates
                         //Check if there's nothing
                         coordinates free_space_coor = new coordinates(check_col, check_row);
                         free_cell.add(free_space_coor);
@@ -53,15 +53,17 @@ public class Griglia {
         int row = height;
         int column = width;
 
+
+        //Checking Cells
         for(int check_row = 1; check_row <= row - 2 ; check_row++){
             for(int check_col = 1 ; check_col <= column - 2 ; check_col ++){
 
                 Object obj = matrix[check_row][check_col];
-                String class_name = obj.getClass().getName();
+                String class_name = obj.getClass().getName();  //Get class name
 
                 fish_free_pair tuple = check_around(check_row, check_col);
-                ArrayList<coordinates> fish = tuple.fish;
-                ArrayList<coordinates> free_cell = tuple.free_cell;
+                ArrayList<coordinates> fish = tuple.fish;   //Get FISH around
+                ArrayList<coordinates> free_cell = tuple.free_cell;  //Get FREE_CELL around
 
                 if(class_name == "Preda"){
                     /* //////////////////////////////////////////////////////////
