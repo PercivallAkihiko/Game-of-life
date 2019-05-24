@@ -17,18 +17,20 @@ public class test {
             coordinates obj = fish.get(i);
             System.out.println("x: " + obj.x + "      y: " + obj.y);
         }
-
-        coordinates removed = fish.remove( random.nextInt(fish.size()));
+        System.out.println( fish.size() );
+		int rand = random.nextInt(fish.size());
+        System.out.println("Sto levando il rand: " + rand);
+        coordinates removed = fish.remove(rand);
         System.out.println("E stato eliminato "+ removed.x + " " + removed.y);
 
         for(int i = 0 ; i < fish.size(); i ++){
             coordinates obj = fish.get(i);
             System.out.println("x: " + obj.x + "      y: " + obj.y);
-        } */
+        }*/
 
-        int[][] matrix = new int[2][2];
-
-
+        int[] prova = new int[2];
+        prova[1] = 2;
+        prova[1] =null;
 
 
 	}

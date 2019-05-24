@@ -16,64 +16,53 @@ public class Predatore {
 
     }
 
-    public coordinates move(fish_free_pair tuple) {
+    public coordinates move(fish_free_pair tuple, coordinates actual_coordinates) {
         //Muove il predatore in uno spazio adiacente a caso, dando priorita` agli spazi con delle prede da mangiare.
 
+        coordinates six = new coordinates(actual_coordinates.x + 1, actual_coordinates.y);
+        coordinates seven = new coordinates(actual_coordinates.x - 1, actual_coordinates.y + 1);
+        coordinates eight = new coordinates(actual_coordinates.x, actual_coordinates.y + 1);
+        coordinates nine = new coordinates(actual_coordinates.x + 1, actual_coordinates.y + 1);
 
-        if (this.has_moved == 1 || (tuple.fish.size() == 0 && tuple.free_cell.size() == 0)) {
+        ArrayList<coordinates> fish = tuple.fish;
+        ArrayList<coordinates> free_cell = tuple.free_cell;
 
-            coordinates output = new coordinates(-1,-1);
-            return output;
+        if (this.has_moved == 1 || (fish.size() == 0 && free_cell.size() == 0)) return  new coordinates(-1,-1);
+
+        if (fish.size() != 0){
+
+            int where_to_move = r.nextInt(fish.size());
+            coordinates new_pos = fish.get(where_to_move);
+
+            if ( new_pos == six || new_pos == seven || new_pos == eight || new_pos == nine) this.has_moved = 1;
+
+            return new_pos;
 
         }
 
+        else {
 
-    }; //0 nella griglia e` lo spazio dove il predatore si trova attualmente.
+            int where_to_move = r.nextInt(free_cell.size());
+            coordinates new_pos = free_cell.get(where_to_move);
 
-    if (tuple.fish.size() != 0) {
+            if (new_pos == six || new_pos == seven || new_pos == eight || new_pos == nine) this.has_moved = 1;
 
-        int where_to_move = r.nextInt(tuple.fish.size() - 1);
-        if ( (int) tuple.fish.get(where_to_move) == 6 || (int) tuple.fish.get(where_to_move) == 7 || (int) tuple.fish.get(where_to_move) == 8 || (int) tuple.fish.get(where_to_move) == 9) {
-            this.has_moved = 1;
+            return new_pos;
+
         }
-
-        coordinates output = tuple.fish.get(where_to_move);
-        return output;
-
     }
 
-    else {
 
-        int where_to_move = r.nextInt(tuple.free_cell.size() - 1);
-        if ( (int) tuple.free_cell.get(where_to_move) == 6 || (int) tuple.free_cell.get(where_to_move) == 7 || (int) tuple.free_cell.get(where_to_move) == 8 || (int) tuple.free_cell.get(where_to_move) == 9) {
-            this.has_moved = 1;
-        }
-
-        coordinates output = tuple.free_cell.get(where_to_move);
-        return output;
-    }
-}
-
-
-    public coordinates breed(fish_free_pair tuple) {
-        //ritorna 1 se il predatore puo` riprodursi (se ci sono spazi liberi adiacenti intorno a lui, 0 altrimenti.
-        if (tuple.free_cell.size() == 0) {
-
-            coordinates output = new coordinates(-1,-1);
-            return output;
-
-        }
-
-        int where_to_breed = r.nextInt(tuple.free_cell.size() - 1);
-        coordinates output = tuple.free_cell.get(where_to_breed);
-        return output;
+    public coordinates breed(ArrayList<coordinates> free_spaces) {
+        if(free_spaces.size() == 0 || this.energy < this.breed_energy) return new coordinates(-1,-1);
+        coordinates new_coord = free_spaces.remove( r.nextInt(free_spaces.size()));
+        return new_coord;
     }
 
     public int dead() {
         //ritorna 1 se il predatore ha 0 di energia e deve morire, 0 altrimenti.
         if (this.energy == 0) return 1;
         return 0;
-
     }
 
 }
