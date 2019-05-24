@@ -52,6 +52,11 @@ public class Wator extends javax.swing.JFrame {
                 jPanel1MouseDragged(evt);
             }
         });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
         jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 jPanel1ComponentResized(evt);
@@ -178,6 +183,31 @@ public class Wator extends javax.swing.JFrame {
         if(play) jButton1.setText("In Pausa");
         else jButton1.setText("Avvia");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        int f = wid * evt.getX() / jPanel1.getWidth();
+        int r = hei * evt.getY() / jPanel1.getHeight();
+        currentMove[r][f] = true;
+        if(SwingUtilities.isLeftMouseButton(evt)){
+            currentMove[r][f] = true;
+
+                if(currentMove[r][f]){
+                    offScrGraph.setColor(Color.CYAN);
+                    int x = f * jPanel1.getWidth()/wid;
+                    int y = r * jPanel1.getHeight()/hei;
+                    offScrGraph.fillRect(x, y, jPanel1.getWidth()/wid, jPanel1.getHeight()/hei);
+                    jPanel1.getGraphics().drawImage(offScrImg, 0, 0, jPanel1);            
+                }   
+        }
+        else
+        {
+                    offScrGraph.setColor(Color.GREEN);
+                    int x = f * jPanel1.getWidth()/wid;
+                    int y = r * jPanel1.getHeight()/hei;
+                    offScrGraph.fillRect(x, y, jPanel1.getWidth()/wid, jPanel1.getHeight()/hei);
+                    jPanel1.getGraphics().drawImage(offScrImg, 0, 0, jPanel1);         
+        }
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     public static void main(String args[]) {
         Wator life = new Wator();
