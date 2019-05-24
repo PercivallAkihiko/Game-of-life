@@ -23,7 +23,7 @@ public class Griglia {
         ArrayList<coordinates> fish = new ArrayList<coordinates>(); // Create an ArrayList FISH
         ArrayList<coordinates> free_cell = new ArrayList<coordinates>(); // Create an ArrayList SHARK
 
-        for(int check_row = row -1; check_row <= row + 1 ; check_row++){  //Check Neigh
+        for(int check_row = row -1 ; check_row <= row + 1 ; check_row++){  //Check Neigh
             for(int check_col = column - 1 ; check_col <= column + 1 ; check_col ++){
                 if(check_row != row && check_col != column){
 
@@ -32,10 +32,10 @@ public class Griglia {
 
                     if(class_name == "Preda"){
                         //Check if it's a FISH
-                        coordinates fish_coordinates = new coordinates(check_col, check_row); //Add FISH coordinates
+                        coordinates fish_coordinates = new coordinates(check_col, check_row);
                         fish.add(fish_coordinates);
                     }
-                    else if(class_name != "Predatore" && class_name != "wall"){              //Add SHARK coordinates
+                    else if(class_name != "Predatore" && class_name != "wall"){
                         //Check if there's nothing
                         coordinates free_space_coor = new coordinates(check_col, check_row);
                         free_cell.add(free_space_coor);
@@ -53,17 +53,15 @@ public class Griglia {
         int row = height;
         int column = width;
 
-
-        //Checking Cells
         for(int check_row = 1; check_row <= row - 2 ; check_row++){
             for(int check_col = 1 ; check_col <= column - 2 ; check_col ++){
 
                 Object obj = matrix[check_row][check_col];
-                String class_name = obj.getClass().getName();  //Get class name
+                String class_name = obj.getClass().getName();
 
                 fish_free_pair tuple = check_around(check_row, check_col);
-                ArrayList<coordinates> fish = tuple.fish;   //Get FISH around
-                ArrayList<coordinates> free_cell = tuple.free_cell;  //Get FREE_CELL around
+                ArrayList<coordinates> fish = tuple.fish;
+                ArrayList<coordinates> free_cell = tuple.free_cell;
 
                 if(class_name == "Preda"){
                     /* //////////////////////////////////////////////////////////
