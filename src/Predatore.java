@@ -5,15 +5,15 @@ public class Predatore {
 
     public int energy;
     public int breed_energy;
-    public int has_moved;
-    private Random r = new Random();
+    private int has_moved;
+    private Random rand;
 
     public Predatore(int energy, int breed_energy) {
         //Crea un nuovo predatore
         this.energy = energy;
         this.breed_energy = breed_energy;
         this.has_moved = 0;
-
+        this.rand = new Random();
     }
 
     public coordinates move(fish_free_pair tuple, coordinates actual_coordinates) {
@@ -30,33 +30,27 @@ public class Predatore {
         if (this.has_moved == 1 || (fish.size() == 0 && free_cell.size() == 0)) return  new coordinates(-1,-1);
 
         if (fish.size() != 0){
-
-            int where_to_move = r.nextInt(fish.size());
+            int where_to_move = rand.nextInt(fish.size());
             coordinates new_pos = fish.get(where_to_move);
-
             if ( new_pos == six || new_pos == seven || new_pos == eight || new_pos == nine) this.has_moved = 1;
-
             return new_pos;
-
         }
 
         else {
-
-            int where_to_move = r.nextInt(free_cell.size());
+            int where_to_move = rand.nextInt(free_cell.size());
             coordinates new_pos = free_cell.get(where_to_move);
 
             if (new_pos == six || new_pos == seven || new_pos == eight || new_pos == nine) this.has_moved = 1;
-
             return new_pos;
 
         }
     }
 
 
-    public coordinates breed(ArrayList<coordinates> free_spaces) {
-        if(free_spaces.size() == 0 || this.energy < this.breed_energy) return new coordinates(-1,-1);
-        coordinates new_coord = free_spaces.remove( r.nextInt(free_spaces.size()));
-        return new_coord;
+    public coordinates breed(ArrayList<coordinates> free_cell) {
+        if(free_cell.size() == 0 || this.energy < this.breed_energy) return new coordinates(-1,-1);
+        coordinates new_pos = free_cell.remove( rand.nextInt(free_cell.size()));
+        return new_pos;
     }
 
     public int dead() {

@@ -5,6 +5,24 @@ public class test {
 
 	public static void main(String[] args) {
 
+
+
+	    Object[] matrix = new Object[2];
+	    matrix[1] = new Preda(3);
+
+	    Object obj = matrix[1];
+	    String class_name = obj.getClass().getName();
+	    if(class_name == "Preda"){
+	        Preda fish = (Preda)obj;
+	        //System.out.println(fish.bree);
+        }
+
+	    /*oordinates prova = new coordinates(1,2);
+	    coordinates prova2 = new coordinates(1,2);
+
+	    if(prova.compares(prova2)) System.out.println("UGUALI");
+	    else System.out.println("NON UGUALI"); */
+
         /*Random random = new Random();
         ArrayList<coordinates> fish = new ArrayList<coordinates>();
 
@@ -28,9 +46,12 @@ public class test {
             System.out.println("x: " + obj.x + "      y: " + obj.y);
         }*/
 
+/*
         int[] prova = new int[2];
         prova[1] = 2;
-        prova[1] =null;
+        prova[1] =null;*/
+
+
 
 
 	}

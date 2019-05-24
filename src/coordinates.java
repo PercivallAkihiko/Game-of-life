@@ -10,4 +10,9 @@ public class coordinates{
         this.y = y;
     }
 
+    public boolean compares(coordinates coor){
+        if(this.x == coor.x || this.y == coor.y) return true;
+        return false;
+    }
+
 }

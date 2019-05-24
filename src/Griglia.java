@@ -52,6 +52,7 @@ public class Griglia {
     public void update_round(){
         int row = height;
         int column = width;
+        coordinates null_coordinates = new coordinates(-1,-1);
 
         for(int check_row = 1; check_row <= row - 2 ; check_row++){
             for(int check_col = 1 ; check_col <= column - 2 ; check_col ++){
@@ -63,40 +64,36 @@ public class Griglia {
                 ArrayList<coordinates> fish = tuple.fish;
                 ArrayList<coordinates> free_cell = tuple.free_cell;
 
-                if(class_name == "Preda"){
-                    /* //////////////////////////////////////////////////////////
-                    DA IMPLEMENTARE
-
-                    if(breed(free_cell){
-                        coordinates removed = fish.remove( random.nextInt(fish.size()));
-                        Preda new_fish = new Preda(breed_time);
-                        matrix[removed.y][removed.x] = new_fish;
+                /*if(class_name == "Preda"){
+                    Preda fish_obj = (Preda)obj;
+                    coordinates coor_fish_son = fish_obj.breed(free_cell);
+                    if(!coor_fish_son.compares(null_coordinates)){
+                        Preda fish_son = new Preda(fish_obj.breed_time, coor_fish_son);
+                        matrix[coor_fish_son.y][coor_fish_son.x] = fish_son;
                     }
 
-                    coordinates new_coor = obj.move(free_cell);
-                    //ELIMINARE POSIZIONE PRECEDENTE
-                    matrix[new_coor.y][new_coord.x] = obj;
-
-                    */ //////////////////////////////////////////////////////////
+                    coordinates new_pos = fish_obj.move(free_cell);
+                    if(!new_pos.compares(null_coordinates)){
+                        //LO ELIMINO DALLA MATRICE
+                        matrix[new_pos.y][new_pos.x] = fish;
+                    }
                 }
                 else if(class_name == "Predatore"){
-                    /* //////////////////////////////////////////////////////////
-                    DA IMPLEMENTARE
-
-                    if(obj.dead) //ELIMINO LA PREDA
-                    else{
-                        if(obj.breed(free_cel)){
-                            coordinates removed = free_cell.remove( random.nextInt(free_cell.size()));
-                            Predatore new_shark = new Predatore(obg.energy * 2 , breed_energy);
-                            matrix[removed.y][removed.x] = new_shark;
+                    Predatore shark_obj = (Predatore)obj;
+                    if(!shark_obj.dead()){
+                        coordinates coor_shark_son = shark_obj.breed(free_cell);
+                        if(!coor_shark_son.compares(null_coordinates)){
+                            Predatore shark_son = new Predatore(shark_obj.energy, shark_obj.breed_energy , coor_shark_son);
+                            matrix[coor_shark_son.y][coor_shark_son.x] = shark_son;
                         }
-
-                        coordinates new_coor = obj.move(free_cell, fish);
-                        //ELIMINARE POSIZIONE PRECEDENTE
-                        matrix[new_coor.y][new_coord.x] = obj;
+                        coordinates new_pos = shark_obj.move(free_cell, fish);
+                        if(!new_pos.compares(null_coordinates)){
+                            //ELIMINO DALLA MATRICE
+                            matrix[new_pos.y][new_pos.x] = shark_obj;
                         }
                     }
-                    */ //////////////////////////////////////////////////////////
+                    else //ELIMINARE DALLA GRIGLIA
+                    */
                 }
 
             }
