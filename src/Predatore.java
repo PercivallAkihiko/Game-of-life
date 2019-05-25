@@ -23,7 +23,7 @@ public class Predatore {
     public Coordinates move(fish_free_pair tuple) {
         //Muove il predatore in uno spazio adiacente a caso, dando priorita` agli spazi con delle prede da mangiare.
 
-        if (this.has_moved == 1 || (fish.size() == 0 && free_cell.size() == 0)) return new Coordinates(-1, -1);
+        if (this.has_moved == 1 || (fish.size() == 0 && freeCell.size() == 0)) return new Coordinates(-1, -1);
 
         //Coordinate nella quali il parametro has_moved deve venire settato a 1.
         Coordinates six = new Coordinates(this.actual_Coordinates.x + 1, this.actual_Coordinates.y);
@@ -46,7 +46,7 @@ public class Predatore {
             //Selezione di quale delle due arraylist utilizzare per decidere la mossa successiva.
             if (tuple.fish.size() != 0) ArrayList<Coordinates> moves = tuple.fish;
             else {
-                ArrayList<Coordinates> moves = tuple.free_cell;
+                ArrayList<Coordinates> moves = tuple.freeCell;
             }
         }
 
@@ -60,11 +60,11 @@ public class Predatore {
     }
     
 
-    public Coordinates breed(ArrayList<Coordinates> free_cell) {
+    public Coordinates breed(ArrayList<Coordinates> freeCell) {
         //Ritorna le coordinate dove riprodursi se il predatore puo` riprodursi. Se non puo` ritorna le coordinate -1,-1.
 
-        if(free_cell.size() == 0 || this.energy < this.breed_energy) return new Coordinates(-1,-1);
-        Coordinates new_pos = free_cell.get(r.nextInt(free_cell.size()));
+        if(freeCell.size() == 0 || this.energy < this.breed_energy) return new Coordinates(-1,-1);
+        Coordinates new_pos = freeCell.get(r.nextInt(freeCell.size()));
         return new_pos;
     }
 
