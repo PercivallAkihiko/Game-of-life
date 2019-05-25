@@ -5,29 +5,31 @@ public class Predatore {
 
     public int energy;
     public int breed_energy;
+    public coordinates actual_coordinates;
     private int has_moved;
     private Random r = new Random();
 
-    public Predatore(int energy, int breed_energy) {
+    public Predatore(int energy, int breed_energy, coordinates actual_coordinates) {
         //Crea un nuovo predatore
 
         this.energy = energy;
         this.breed_energy = breed_energy;
         this.has_moved = 0;
+        this.actual_coordinates = actual_coordinates;
 
     }
 
 
-    public coordinates move(fish_free_pair tuple, coordinates actual_coordinates) {
+    public coordinates move(fish_free_pair tuple) {
         //Muove il predatore in uno spazio adiacente a caso, dando priorita` agli spazi con delle prede da mangiare.
 
         if (this.has_moved == 1 || (fish.size() == 0 && free_cell.size() == 0)) return new coordinates(-1, -1);
 
         //Coordinate nella quali il parametro has_moved deve venire settato a 1.
-        coordinates six = new coordinates(actual_coordinates.x + 1, actual_coordinates.y);
-        coordinates seven = new coordinates(actual_coordinates.x - 1, actual_coordinates.y + 1);
-        coordinates eight = new coordinates(actual_coordinates.x, actual_coordinates.y + 1);
-        coordinates nine = new coordinates(actual_coordinates.x + 1, actual_coordinates.y + 1);
+        coordinates six = new coordinates(this.actual_coordinates.x + 1, this.actual_coordinates.y);
+        coordinates seven = new coordinates(this.actual_coordinates.x - 1, actual_coordinates.y + 1);
+        coordinates eight = new coordinates(this.actual_coordinates.x, this.actual_coordinates.y + 1);
+        coordinates nine = new coordinates(this.actual_coordinates.x + 1, this.actual_coordinates.y + 1);
 
         /***************************************************************************************************************
         * i nomi delle coordinates definita qui sopra sono questi perche` la griglia delle mosse e` pensata come segue.*
@@ -51,6 +53,7 @@ public class Predatore {
         //Selezione pseudo-randomica della coordinata dove muoversi ed eventuale settaggio a 1 di has_moved.
         int where_to_move = r.nextInt(moves.size());
         coordinates new_pos = moves.get(where_to_move);
+        this.actual_coordinates = new_pos;
         if ( new_pos == six || new_pos == seven || new_pos == eight || new_pos == nine) this.has_moved = 1;
         return new_pos;
         
