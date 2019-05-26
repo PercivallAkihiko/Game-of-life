@@ -10,6 +10,7 @@ public class OldTownRoad extends javax.swing.JFrame
 
     int alt = 50;
     int larg = 100;
+    int Update_Speed = 16;
     int[][] Griglia = new int[alt][larg];
     boolean Gioca;
     Image Immagine;
@@ -32,7 +33,7 @@ public class OldTownRoad extends javax.swing.JFrame
                 }
             }
         };
-        tempo.scheduleAtFixedRate(lavoro, 0, 16);
+        tempo.scheduleAtFixedRate(lavoro, 0, Update_Speed);
     }
 
     private void Colora()
