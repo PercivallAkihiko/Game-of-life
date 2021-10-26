@@ -15,7 +15,7 @@ Tutte le attività si svolgono secondo quanti di tempo, per ogni tempo la grigli
 #REGOLE PESCI
 1) Ad ogni quanto di tempo, i pesci si muovono casualmente in una delle caselle adiacenti, ammesso che ve ne sia una libera, cioè priva di squali e pesci al suo interno. Se non vi sono caselle libere non avviene alcun movimento.
 
-2) I pesci hanno associato un tempo di riproduzione, passato il quale il pesce si può riprodurre, Questo accade se il pesce può muoversi in una nuova posizione (e lascia il nuovo nato nella posizione occupata precedentemente). Se ciò accade il suo tempo di riproduzione ritorna a zero.
+2) I pesci hanno associato un tempo di riproduzione, passato il quale il pesce si può riprodurre, Questo accade se il pesce può muoversi in una nuova posizione (e lascia il nuovo nato nella posizione occupata precedentemente). Se ciò accade il suo tempo di riproduzione ritorna a zero. 
 
 #REGOLE SQUALI
 1) Ad ogni cronone, gli squali si muovono casualmente in una delle caselle adiacenti occupate dai pesci. Se non ve ne sono si muovono in una casella casuale fra quelle adiacenti purché non vi siano squali al suo interno. Se nessuna casella soddisfa i requisiti non avviene alcun movimento.
